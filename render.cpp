@@ -1,5 +1,5 @@
 #include <Bela.h>
-#include "gen_export.h"
+#include "gen_exported.h"
 
 CommonState* gState = NULL;
 t_sample* gInputs = NULL;
@@ -7,7 +7,7 @@ t_sample* gOutputs = NULL;
 
 bool setup(BelaContext *context, void *userData)
 {
-	gState = (CommonState*)gen_export::create(context->audioSampleRate, context->audioFrames);
+	gState = (CommonState*)gen_exported::create(context->audioSampleRate, context->audioFrames);
 	gInputs = new t_sample[context->audioFrames * context->audioInChannels];
 	gOutputs = new t_sample[context->audioFrames * context->audioOutChannels];
 	return true;
@@ -32,7 +32,7 @@ void render(BelaContext *context, void *userData)
 		op[i] = gOutputs + (i * nFrames);
 	}
 
-	gen_export::perform(gState, ip, nInChannels, op, nOutChannels, nFrames);
+	gen_exported::perform(gState, ip, nInChannels, op, nOutChannels, nFrames);
 
 	for (int i = 0; i < nOutChannels; i++) {
 		for (int j = 0; j < nFrames; j++) {
@@ -44,7 +44,7 @@ void render(BelaContext *context, void *userData)
 void cleanup(BelaContext *context, void *userData)
 {
     if (gState) {
-        gen_export::destroy(gState);
+        gen_exported::destroy(gState);
     }
 		if (gInputs) {
 			delete[] gInputs;

@@ -25,7 +25,7 @@
 #include "genlib_exportfunctions.h"
 #include "genlib_ops.h"
 
-namespace gen_export {
+namespace gen_exported {
 
 int num_inputs();
 int num_outputs();
@@ -45,4 +45,4 @@ short setstate(CommonState *cself, const char *state);
 void * create(t_param sr, long vs);
 void destroy(CommonState *cself);
 
-} // gen_export::
+} // gen_exported::
