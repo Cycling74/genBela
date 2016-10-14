@@ -115,7 +115,10 @@ extern "C" {
 	extern int abs(int);
 
 	extern char *strcpy(char *, const char *);
+#else
+#	include <stdlib.h> // abs
 #endif // MSP_ON_CLANG
+
 
 #if defined(GENLIB_USE_ARMMATH) // ARM embedded support
 #	include "arm_math.h"
